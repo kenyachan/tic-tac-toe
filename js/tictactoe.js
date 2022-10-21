@@ -32,3 +32,23 @@ const Game = (() => {
         add, reset, board,
     }
 })();
+
+const Player = (name, sign) => {
+    const _name = name;
+    const _sign = sign;
+    
+    const getName = () => {
+        return _name;
+    }
+
+    const getSign = () => {
+        return _sign;
+    }
+
+    
+
+    return {
+        getName, getSign,
+    }
+
+};
