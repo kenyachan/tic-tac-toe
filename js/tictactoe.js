@@ -92,7 +92,7 @@ const Game = (() => {
         outcomeText.classList.add('hidden');
     }
 
-    const _toggleActivePlayer = () => {
+    const toggleActivePlayer = () => {
         activePlayer = activePlayer === player1 ? player2 : player1;
 
         players.forEach((player) => {
@@ -144,7 +144,7 @@ const Game = (() => {
             } else if (win === null) {
                 declareWinner('Tie Game');
             } else {
-                _toggleActivePlayer();
+                toggleActivePlayer();
             }
 
         })
