@@ -90,19 +90,23 @@ const Game = (() => {
 
     const checkWin = () => {
         let activePlayerMoves = activePlayer.getMoves();
-        let win = null;
-        
-        if (activePlayerMoves.length < 3) 
-            return null;
+        let gameBoard = board.getBoard();
 
-        win = !winningCombos.every(combo => {
+        let tie = gameBoard.every(move => {
+            return move ===
+                player1.getSign() || move === player2.getSign();
+        });
+
+        if (tie === true) return null;
+
+        let winner = !winningCombos.every(combo => {
             let containsWinningCombo = !combo.every(value => activePlayerMoves.includes(value));
 
             if (containsWinningCombo === true)
                 return true;
         });
 
-        return win;
+        return winner;
     }
 
     const declareWinner = () => {
@@ -118,11 +122,14 @@ const Game = (() => {
             board.add(activePlayer.getSign(), event.target.dataset.index);
             event.target.disabled = true;
             
-            let win = checkWin();
+            let win = activePlayer.getMoves().length >= 3? checkWin() : false;
 
             if (win === true) {
                 declareWinner();
                 console.log (activePlayer.getName());
+            } else if (win === null) {
+                declareWinner();
+                console.log('tie game');
             } else {
                 _toggleActivePlayer();
             }
