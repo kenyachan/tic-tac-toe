@@ -26,9 +26,9 @@ const Player = (name, sign) => {
 
 };
 
-const Board = (squares) => {
+const Board = () => {
     const board = ['','','','','','','','',''];
-    const _squares = squares;
+    const squares = document.querySelectorAll('#game .square'); 
 
     const add = (sign, position) => {
         if (position < 0 || position > 8) return;
@@ -39,18 +39,16 @@ const Board = (squares) => {
     }
 
     const _render = () => {
-        _squares.forEach((square) => {
+        squares.forEach((square) => {
             square.textContent = board[square.dataset.index];
         });
     }
 
     const reset = () => {
-        _squares.forEach((square) => {
+        squares.forEach((square) => {
             square.disabled = false;
             board[square.dataset.index] = '';
         });
-
-        // activePlayer = player1;
 
         _render();
     }
@@ -66,10 +64,10 @@ const Board = (squares) => {
 
 
 const Game = (() => {
-    const squares = document.querySelectorAll('#game .square');  
+    const squares = document.querySelectorAll('#game .square');
     const resetButton = document.querySelector('#game #reset-button');
     
-    const board = Board(squares);
+    const board = Board();
     const winningCombos = [['0', '1', '2'], ['3', '4', '5'], ['6', '7', '8'], ['0', '3', '6'], ['1', '4', '7'], ['2', '5', '8'], ['0', '4', '8'], ['2', '4', '6']];
     
     let player1 = Player('Player 1', 'X');
@@ -78,7 +76,8 @@ const Game = (() => {
 
     const resetGame = () => {
         board.reset();
-        
+    
+        // recreate players to clear play history
         player1 = Player('Player 1', 'X');
         player2 = Player('Player 2', 'O');
 
@@ -109,6 +108,12 @@ const Game = (() => {
         return null;
     }
 
+    const declareWinner = () => {
+        squares.forEach((square) => {
+            square.disabled = true;
+        });
+    }
+
     // game logic/flow
     squares.forEach((square) => {
         square.addEventListener('click', (event) => {
@@ -119,6 +124,7 @@ const Game = (() => {
             let winner = checkWinner();
 
             if (winner !== null) {
+                declareWinner();
                 console.log (winner.getName());
             } else {
                 _toggleActivePlayer();
