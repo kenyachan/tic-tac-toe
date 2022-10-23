@@ -88,7 +88,7 @@ const Game = (() => {
         activePlayer = activePlayer === player1 ? player2 : player1;
     }
 
-    const checkWinner = () => {
+    const checkWin = () => {
         let activePlayerMoves = activePlayer.getMoves();
         let win = null;
         
@@ -102,10 +102,7 @@ const Game = (() => {
                 return true;
         });
 
-        if (win === true) 
-            return activePlayer;
-
-        return null;
+        return win;
     }
 
     const declareWinner = () => {
@@ -121,11 +118,11 @@ const Game = (() => {
             board.add(activePlayer.getSign(), event.target.dataset.index);
             event.target.disabled = true;
             
-            let winner = checkWinner();
+            let win = checkWin();
 
-            if (winner !== null) {
+            if (win === true) {
                 declareWinner();
-                console.log (winner.getName());
+                console.log (activePlayer.getName());
             } else {
                 _toggleActivePlayer();
             }
