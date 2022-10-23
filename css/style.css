@@ -17,7 +17,7 @@ main {
 
 #game {
     display: grid;
-    grid-template-rows: auto auto 1fr;
+    grid-template-rows: auto 1rem 1fr;
     
     gap: 1rem;
     justify-content: center;
@@ -41,4 +41,22 @@ main {
 
 #board > .square:hover {
     border: 1px solid orange;
+}
+
+#players .active {
+    border: 1px solid orange;
+}
+
+#outcome-text span {
+    position: absolute;
+}
+
+#outcome-text {
+    opacity: 1;
+    transition: opacity 100ms;
+}
+
+#outcome-text.hidden {
+    opacity: 0;
+    transition: opacity 100ms;
 }

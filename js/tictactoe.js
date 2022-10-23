@@ -67,6 +67,7 @@ const Game = (() => {
     const squares = document.querySelectorAll('#game .square');
     const resetButton = document.querySelector('#game #reset-button');
     const players = document.querySelectorAll('#game .player');
+    const outcomeText = document.querySelector('#outcome-text');
     
     const board = Board();
     const winningCombos = [['0', '1', '2'], ['3', '4', '5'], ['6', '7', '8'], ['0', '3', '6'], ['1', '4', '7'], ['2', '5', '8'], ['0', '4', '8'], ['2', '4', '6']];
@@ -86,6 +87,9 @@ const Game = (() => {
 
         players[0].classList.add('active');
         players[1].classList.remove('active');
+
+        outcomeText.textContent = '';
+        outcomeText.classList.add('hidden');
     }
 
     const _toggleActivePlayer = () => {
@@ -117,10 +121,13 @@ const Game = (() => {
         return winner;
     }
 
-    const declareWinner = () => {
+    const declareWinner = (outcome) => {
         squares.forEach((square) => {
             square.disabled = true;
         });
+
+        outcomeText.textContent = outcome;
+        outcomeText.classList.remove('hidden');
     }
 
     // game logic/flow
@@ -133,11 +140,9 @@ const Game = (() => {
             let win = activePlayer.getMoves().length >= 3? checkWin() : false;
 
             if (win === true) {
-                declareWinner();
-                console.log (activePlayer.getName());
+                declareWinner(`${activePlayer.getName()} wins!`);
             } else if (win === null) {
-                declareWinner();
-                console.log('tie game');
+                declareWinner('Tie Game');
             } else {
                 _toggleActivePlayer();
             }
