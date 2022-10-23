@@ -72,13 +72,18 @@ const Game = (() => {
     const board = Board(squares);
     const winningCombos = [['0', '1', '2'], ['3', '4', '5'], ['6', '7', '8'], ['0', '3', '6'], ['1', '4', '7'], ['2', '5', '8'], ['0', '4', '8'], ['2', '4', '6']];
     
-    const player1 = Player('Player 1', 'X');
-    const player2 = Player('Player 2', 'O');
+    let player1 = Player('Player 1', 'X');
+    let player2 = Player('Player 2', 'O');
     let activePlayer = player1;
 
+    const resetGame = () => {
+        board.reset();
+        
+        player1 = Player('Player 1', 'X');
+        player2 = Player('Player 2', 'O');
 
-    // resetButton.addEventListener('click', () => board.reset());
-    
+        activePlayer = player1;
+    }
 
     const _toggleActivePlayer = () => {
         activePlayer = activePlayer === player1 ? player2 : player1;
@@ -121,6 +126,8 @@ const Game = (() => {
 
         })
     });
+
+    resetButton.addEventListener('click', () => resetGame());
 
 })();
 
