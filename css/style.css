@@ -3,3 +3,42 @@
     margin: 0;
     box-sizing: border-box;
 }
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+main {
+    flex: 1 1 auto;
+}
+
+
+#game {
+    display: grid;
+    grid-template-rows: auto auto 1fr;
+    
+    gap: 1rem;
+    justify-content: center;
+}
+
+#game > #board {
+    display: grid;
+    grid-template: 50px 50px 50px / 50px 50px 50px;
+    gap: 1px;
+
+    /* justify-content: center; */
+}
+
+#board > .square {
+    display: grid;
+    align-items: center;
+    justify-content: center;
+    /* background-color: transparent;
+    border: 1px solid lightgrey; */
+}
+
+#board > .square:hover {
+    border: 1px solid orange;
+}
