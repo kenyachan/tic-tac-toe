@@ -66,6 +66,7 @@ const Board = () => {
 const Game = (() => {
     const squares = document.querySelectorAll('#game .square');
     const resetButton = document.querySelector('#game #reset-button');
+    const players = document.querySelectorAll('#game .player');
     
     const board = Board();
     const winningCombos = [['0', '1', '2'], ['3', '4', '5'], ['6', '7', '8'], ['0', '3', '6'], ['1', '4', '7'], ['2', '5', '8'], ['0', '4', '8'], ['2', '4', '6']];
@@ -82,10 +83,17 @@ const Game = (() => {
         player2 = Player('Player 2', 'O');
 
         activePlayer = player1;
+
+        players[0].classList.add('active');
+        players[1].classList.remove('active');
     }
 
     const _toggleActivePlayer = () => {
         activePlayer = activePlayer === player1 ? player2 : player1;
+
+        players.forEach((player) => {
+            player.classList.toggle('active');
+        });
     }
 
     const checkWin = () => {
