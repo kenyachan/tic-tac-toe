@@ -154,3 +154,26 @@ const Game = (() => {
 
 })();
 
+const modal = (() => {
+    const overlay = document.querySelector('.modal-widget .overlay');
+    const modalForm = document.querySelector('.modal-widget .modal')
+    const newGameButton = document.querySelector('.modal-widget #new-game-form #new-game-button');
+
+    newGameButton.addEventListener('click', ()=> {
+        close();
+        newGame();
+    });
+
+    const close = () => {
+        overlay.classList.toggle('active');
+        modalForm.classList.toggle('active');
+    }
+
+
+    const newGame = () => {
+        // set player names
+        let player1 = Player(playerOneName.value, 'X');
+        let player2 = Player(playerTwoName.value, 'O');
+
+    }
+})();

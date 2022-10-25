@@ -13,6 +13,24 @@
         <h1>Tic Tac Toe</h1>
     </header>
     <main>
+        <section class="modal-widget">
+            <div class="overlay active"></div>
+            <form id="new-game-form" class="modal active">
+                <ul>
+                    <li>
+                        <label for="playerOneName">Player 1:</label>
+                        <input type="text" id="playerOneName" name="playerOneName">
+                    </li>
+                    <li>
+                        <label for="playerTwoName">Player 2:</label>
+                        <input type="text" id="playerTwoName" name="playerTwoName">
+                    </li>
+                    <li>
+                        <button type="button" id="new-game-button">New Game</button>
+                    </li>
+                </ul>
+            </form>
+        </section>
         <section id="game">
             <section id="players">
                 <p class="active player">Player 1 : X</p>

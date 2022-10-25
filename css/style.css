@@ -60,3 +60,47 @@ main {
     opacity: 0;
     transition: opacity 100ms;
 }
+
+
+
+.modal-widget {
+    position: fixed;
+    top: 0;
+    z-index: 1;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.modal-widget .overlay {
+    backdrop-filter: blur(3px) opacity(0);
+    height: 0;
+    width: 100vw;
+
+    will-change: backdrop-filter;
+    transition: backdrop-filter 400ms ease;
+}
+
+.modal-widget .overlay.active {
+    backdrop-filter: blur(3px) opacity(1);
+    height: 100vh;
+
+    will-change: backdrop-filter;
+    transition: backdrop-filter 400ms ease;
+}
+
+.modal-widget form {
+    position: fixed;
+    bottom: 105%;
+
+    will-change: bottom;
+    transition: bottom 100ms ease-out;
+}
+
+.modal-widget form.active {
+    bottom: 60vh;
+
+    will-change: bottom;
+    transition: bottom 150ms ease-in;
+}
