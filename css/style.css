@@ -4,6 +4,8 @@
     --blue: rgb(37, 99, 234);
     --lightblue: rgb(53, 108, 227);
     --darkblue: rgb(24, 90, 234);
+    --lightgrey: rgb(250, 250, 250);
+
 }
 
 * {
@@ -18,8 +20,36 @@ body {
     min-height: 100vh;
 }
 
+header {
+    background-color: var(--lightgrey);
+    display: flex;
+    justify-content: center;
+    padding: 2rem 0;
+}
+
+.page-width {
+    width: 600px;
+}
+
 main {
     flex: 1 1 auto;
+
+    display: flex;
+    justify-content: center;
+
+    padding: 2rem 0;
+}
+
+footer {
+    display: flex;
+    justify-content: center;
+
+    background-color: var(--lightgrey);
+    padding: 2rem 0;
+}
+
+footer a {
+    text-decoration: none;
 }
 
 

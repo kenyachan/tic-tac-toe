@@ -10,7 +10,9 @@
 </head>
 <body>
     <header>
-        <h1>Tic Tac Toe</h1>
+        <div class="page-width">
+            <h1>Tic Tac Toe</h1>
+        </div>
     </header>
     <main>
         <section class="modal-widget">
@@ -32,28 +34,32 @@
                 </ul>
             </form>
         </section>
-        <section id="game">
-            <section id="players">
-                <p class="active player">Player 1 : X</p>
-                <p class="player">Player 2 : O</p>
+        <div class="page-width">           
+            <section id="game">
+                <section id="players">
+                    <p class="active player">Player 1 : X</p>
+                    <p class="player">Player 2 : O</p>
+                </section>
+                <span id="outcome-text" class="hidden"></span>
+                <div id="board">
+                    <button  class="square" data-index="0"></button>
+                    <button  class="square" data-index="1"></button>
+                    <button  class="square" data-index="2"></button>
+                    <button  class="square" data-index="3"></button>
+                    <button  class="square" data-index="4"></button>
+                    <button  class="square" data-index="5"></button>
+                    <button  class="square" data-index="6"></button>
+                    <button  class="square" data-index="7"></button>
+                    <button  class="square" data-index="8"></button>
+                </div>
+                <button id="reset-button">Reset</button>
             </section>
-            <span id="outcome-text" class="hidden"></span>
-            <div id="board">
-                <button  class="square" data-index="0"></button>
-                <button  class="square" data-index="1"></button>
-                <button  class="square" data-index="2"></button>
-                <button  class="square" data-index="3"></button>
-                <button  class="square" data-index="4"></button>
-                <button  class="square" data-index="5"></button>
-                <button  class="square" data-index="6"></button>
-                <button  class="square" data-index="7"></button>
-                <button  class="square" data-index="8"></button>
-            </div>
-            <button id="reset-button">Reset</button>
-        </section>
+        </div>
     </main>
     <footer>
-        <p>Created by Kenya Chan</p>
+        <div class="page-width">
+            <p>Created by <a href="https://github.com/kenyachan">Kenya Chan</a></p>
+        </div>
     </footer>
 </body>
 </html>
