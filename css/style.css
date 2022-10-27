@@ -1,11 +1,12 @@
 :root {
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-    
     --blue: rgb(37, 99, 234);
     --lightblue: rgb(53, 108, 227);
     --darkblue: rgb(24, 90, 234);
     --lightgrey: rgb(250, 250, 250);
-
+    --darkgrey: rgb(100, 100, 100);
+    
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: var(--darkgrey);
 }
 
 * {
@@ -73,16 +74,38 @@ footer a {
     display: grid;
     align-items: center;
     justify-content: center;
-    /* background-color: transparent;
-    border: 1px solid lightgrey; */
+
+    color: var(--darkgrey);
+    font-size: 2rem;
+
+    background-color: transparent;
+    border: 1px solid lightgrey;
+    /* border: none; */
 }
 
 #board > .square:hover {
     border: 1px solid orange;
 }
 
-#players .active {
+#players {
+    display: grid;
+    gap: 0.5rem;
+}
+
+#players .player {
+    padding: 0.5rem;
+    border-radius: 5px;
+    border: transparent;
+
+    font-size: 1rem;
+    transition: font-size .25s ease, border .25 ease;
+}
+
+#players .player.active {
     border: 1px solid orange;
+
+    font-size: 1.2rem;
+    transition: font-size .25s ease, border .25s ease;
 }
 
 #outcome-text span {
@@ -97,6 +120,17 @@ footer a {
 #outcome-text.hidden {
     opacity: 0;
     transition: opacity 100ms;
+}
+
+#game #reset-button {
+    padding: 1rem 0;
+    font-size: 1rem;
+
+    border-radius: 5px;
+    border: none;
+    background-color: var(--blue);
+    color: #ffffff;
+    
 }
 
 
