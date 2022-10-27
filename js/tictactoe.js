@@ -155,7 +155,7 @@ const TicTacToe = (() => {
 
     //
     const reset = () => {
-        Board.reset();
+        board.reset();
         Modal.newGame();
 
         players[0].classList.add('active');
