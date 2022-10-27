@@ -111,11 +111,11 @@ const Modal = (() => {
     const newGameButton = document.querySelector('.modal-widget #new-game-form #new-game-button');
 
     newGameButton.addEventListener('click', ()=> {
-        _close();
+        toggle();
         newGame();
     });
 
-    const _close = () => {
+    const toggle = () => {
         overlay.classList.toggle('active');
         modalForm.classList.toggle('active');
     }
@@ -125,7 +125,7 @@ const Modal = (() => {
     }
 
     return {
-        newGame,
+        newGame, toggle,
     }
 })();
 
