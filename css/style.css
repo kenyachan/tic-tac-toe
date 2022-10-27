@@ -1,3 +1,11 @@
+:root {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    
+    --blue: rgb(37, 99, 234);
+    --lightblue: rgb(53, 108, 227);
+    --darkblue: rgb(24, 90, 234);
+}
+
 * {
     padding: 0;
     margin: 0;
@@ -96,6 +104,11 @@ main {
 
     will-change: bottom;
     transition: bottom 100ms ease-out;
+    
+    box-shadow: 2px 2px 3px 3px rgb(245, 245, 245);
+    border-radius: 5px;
+    background-color: #ffffff;
+    padding: 2rem;
 }
 
 .modal-widget form.active {
@@ -103,4 +116,49 @@ main {
 
     will-change: bottom;
     transition: bottom 150ms ease-in;
+}
+
+.modal-widget form {
+    display: grid;
+    grid-template-rows: auto auto;
+    gap: 1rem;
+
+    border: none;
+}
+
+.modal-widget form ul {
+    display: grid;
+    grid-template-rows: repeat(3, auto);
+    gap: 1rem;
+
+    list-style: none;
+    align-items: center;
+}
+
+.modal-widget form input {
+    appearance: none;
+    font-size: 1rem;
+    padding: .5rem;
+    border-radius: 5px;
+    border: 1px solid grey;
+}
+
+
+.modal-widget form button {
+    height: 44px;
+    width: 100%;
+
+    background-color: var(--blue);
+    border: none;
+    color: #ffffff;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+.modal-widget form button:hover {
+    background-color: var(--lightblue);   
+}
+
+.modal-widget form button:active {
+    background-color: var(--darkblue);
 }
