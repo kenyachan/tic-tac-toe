@@ -109,6 +109,15 @@ const Modal = (() => {
     const overlay = document.querySelector('.modal-widget .overlay');
     const modalForm = document.querySelector('.modal-widget .modal')
     const newGameButton = document.querySelector('.modal-widget #new-game-form #new-game-button');
+    const gameModeSwitch = document.querySelector('.modal-widget .switch-widget #game-mode-switch');
+    const player2NameInput = document.querySelector('.modal-widget #playerTwoName');
+    const player2NameInputLabel = document.querySelector('.modal-widget #playerTwoLabel')
+    
+
+    gameModeSwitch.addEventListener('change', ()=> {
+        player2NameInput.classList.toggle('hidden');
+        player2NameInputLabel.classList.toggle('hidden');
+    });
 
     newGameButton.addEventListener('click', ()=> {
         toggle();

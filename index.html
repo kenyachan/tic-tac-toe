@@ -21,12 +21,21 @@
                 <h1>Tic Tac Toe</h1>
                 <ul>
                     <li>
-                        <label for="playerOneName">Player 1:</label>
+                        <label for="playerOneName" class="playerLabel">Player 1:</label>
                         <input type="text" id="playerOneName" name="playerOneName">
                     </li>
                     <li>
-                        <label for="playerTwoName">Player 2:</label>
+                        <label id="playerTwoLabel" for="playerTwoName" class="playerLabel">Player 2:</label>
                         <input type="text" id="playerTwoName" name="playerTwoName">
+                    </li>
+                    <li>
+                        <div class="switch-widget">
+                            <input id="game-mode-switch" type="checkbox" name="gameModeSwitch">
+                            <label for="game-mode-switch">
+                                <span class="on">1 vs. Computer</span>
+                                <span class="off">2 Players</span>
+                            </label>
+                        </div>
                     </li>
                     <li>
                         <button type="button" id="new-game-button">New Game</button>

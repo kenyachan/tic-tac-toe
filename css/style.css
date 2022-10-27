@@ -199,12 +199,19 @@ footer a {
     align-items: center;
 }
 
-.modal-widget form input {
+.modal-widget form input[type="text"] {
     appearance: none;
     font-size: 1rem;
-    padding: .5rem;
-    border-radius: 5px;
-    border: 1px solid grey;
+    /* padding: 0 .5rem; */
+    /* border-radius: 5px; */
+    /* border: 1px solid grey; */
+    border: none;
+    border-bottom: 1px solid grey;
+}
+
+.modal-widget form input[type="text"]:focus {
+    border-bottom: 1px solid var(--blue);
+    outline: none;
 }
 
 
@@ -225,4 +232,85 @@ footer a {
 
 .modal-widget form button:active {
     background-color: var(--darkblue);
+}
+
+
+.switch-widget {
+    display: grid;
+    align-items: center;
+    grid-template-columns: auto 1fr;
+    gap: 1rem;
+}
+
+.switch-widget > input[type="checkbox"] {
+    grid-column: 1 / 2;
+}
+
+.switch-widget > label {
+    grid-column: 2 / 3;
+    display: grid;
+    align-items: center;
+}
+
+/* Switch Styling */
+.switch-widget input[type="checkbox"] {
+    appearance: none;
+    width: 37px;
+    height: 12px;
+    border-radius: 15px;
+    background-color: lightgrey;
+    position: relative;
+    transition: background-color 400ms ease;
+}
+
+/* Switch background when position is 'on' */
+.switch-widget input[type="checkbox"]:checked {
+    background-color: var(--green, rgb(147, 220, 0));
+    transition: background-color 400ms ease;
+}
+
+/* Controls how far the slider moves */
+.switch-widget input[type="checkbox"]:checked::before {
+    left: 19px;
+    transition: left 200ms;
+}
+
+/* slider pseudo element styling and initial position */
+.switch-widget input[type="checkbox"]::before {
+    width: 16px;
+    height: 16px;
+    border: 1px solid lightgrey;
+    border-radius: 50%;
+    background-color: white;
+    content: '';
+
+    /* Initial position */
+    position: absolute;
+    top: -3px;
+    left: 0px;
+
+    transition: left 200ms;
+}
+
+/* || Label - Animation for toggling label */
+
+.switch-widget input[type="checkbox"] ~ label .off,
+.switch-widget input[type="checkbox"]:checked ~ label .on {
+    opacity: 1;
+    transition: opacity 100ms;
+}
+
+.switch-widget input[type="checkbox"] ~ label .on,
+.switch-widget input[type="checkbox"]:checked ~ label .off {
+    opacity: 0;
+    transition: opacity 100ms;
+}
+
+/* Ensures labels overlap */
+.switch-widget label span {
+    position: absolute;
+}
+
+#new-game-form .hidden {
+    display: none;
 }
