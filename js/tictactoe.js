@@ -83,6 +83,8 @@ const Player = (name, sign) => {
     const _name = name;
     const _sign = sign;
     
+    let _isComputer = false;
+    
     const getName = () => {
         return _name;
     }
@@ -99,8 +101,16 @@ const Player = (name, sign) => {
         return _moves;
     }
 
+    const setAsComputer = () => {
+        _isComputer = true;
+    }
+
+    const isComputer = () => {
+        return _isComputer;
+    }
+
     return {
-        getName, getSign, addMove, getMoves,
+        getName, getSign, addMove, getMoves, setAsComputer, isComputer,
     }
 
 };
@@ -113,10 +123,13 @@ const Modal = (() => {
     const player2NameInput = document.querySelector('.modal-widget #playerTwoName');
     const player2NameInputLabel = document.querySelector('.modal-widget #playerTwoLabel')
     
+    let vsComputer = gameModeSwitch.checked;
 
     gameModeSwitch.addEventListener('change', ()=> {
         player2NameInput.classList.toggle('hidden');
         player2NameInputLabel.classList.toggle('hidden');
+        
+        vsComputer = gameModeSwitch.checked;
     });
 
     newGameButton.addEventListener('click', ()=> {
@@ -130,7 +143,17 @@ const Modal = (() => {
     }
 
     const newGame = () => {
-        TicTacToe.newGame(Player(playerOneName.value, 'X'), Player(playerTwoName.value, 'O'));
+        let player1 = Player(playerOneName.value, 'X');
+        let player2;
+
+        if (vsComputer === true) {
+            player2 = Player('Computer', 'O');
+            player2.setAsComputer();
+        } else {
+            player2 = Player(playerTwoName.value, 'O');
+        }
+
+        TicTacToe.newGame(player1, player2);
     }
 
     return {
@@ -151,7 +174,6 @@ const TicTacToe = (() => {
     let _activePlayer;
     let board;
     
-
     //
     const newGame = (player1, player2) => {
         _player1 = player1;
@@ -182,9 +204,7 @@ const TicTacToe = (() => {
         });
     }
 
-    const checkWin = (player) => {
-        let moves = player.getMoves();
-
+    const checkWin = (moves) => {
         let winResult = !winningCombos.every(combo => {
             let containsWinningCombo = !combo.every(value => moves.includes(value));
 
@@ -212,7 +232,7 @@ const TicTacToe = (() => {
         board.play(player.getSign(), position);
 
         if (player.getMoves().length >= 3) {
-            let win = checkWin(player);
+            let win = checkWin(player.getMoves());
 
             if (win === true) {
                 board.disable();
@@ -225,17 +245,34 @@ const TicTacToe = (() => {
                 return;
             }
         }
-
+        
         toggleActivePlayer();
     }
 
+    const playComputerRound = (player, board) => {
+        let position;
+        let _board = board.getBoard();
+
+        while (_board[position] !== '') {
+            position = Math.floor(Math.random() * 8);
+        }
+
+        playRound(player, position.toString(), board);
+    }
+
     squares.forEach(square => {
-        square.addEventListener('click', (event) => playRound(_activePlayer, event.target.dataset.index, board));
+        square.addEventListener('click', (event) => {
+            playRound(_activePlayer, event.target.dataset.index, board);
+
+            if (_activePlayer.isComputer() === true) {
+                playComputerRound(_activePlayer, board);
+            }
+        });
     });
 
     resetButton.addEventListener('click', () => reset());
 
     return {
-        newGame,
+        newGame, checkWin,
     }
 })();
