@@ -1,20 +1,22 @@
-(function Gameboard () {
-	const board = [];
+const Gameboard = (() {
+	const board = ['o'];
 
 	function play(symbol, position) {
 		if (position < 0 || position > 8)
 			throw new Error(`Position not valid: ${position}`);
 
-		if (board[position] !== undefined)
-			throw new Error(`Position already taken: ${board[position]}`);
+		if (this.board[position] !== undefined)
+			throw new Error(`Position already taken: ${this.board[position]}`);
 
-		board[position] = symbol;
+		this.board[position] = symbol;
 
-		return board[position];
+		return this.board[position];
 	}
 
 	return {
+		board,
 		play,
-
 	}
 })();
+
+export Gameboard;
