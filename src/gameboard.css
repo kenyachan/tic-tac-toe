@@ -1,0 +1,15 @@
+#gameboard {
+	display: grid;
+	grid-template-columns: repeat(3, 41px);
+	grid-template-rows: repeat(3, 41px);
+}
+
+.square {
+	height: 40px;
+	width: 40px;
+	border: 1px solid grey;
+}
+
+.square:hover {
+	outline: 1px solid orange;
+}
