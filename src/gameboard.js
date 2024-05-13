@@ -1,4 +1,4 @@
-const Gameboard = (() {
+const Gameboard = (() => {
 	const board = ['o'];
 
 	function play(symbol, position) {
@@ -13,10 +13,15 @@ const Gameboard = (() {
 		return this.board[position];
 	}
 
+	function clear() {
+		return this.board.forEach(square => square = undefined);
+	}
+
 	return {
 		board,
 		play,
+		clear,
 	}
 })();
 
-export Gameboard;
+export { Gameboard };
