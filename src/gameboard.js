@@ -1,5 +1,5 @@
 const Gameboard = (() => {
-	const board = ['o'];
+	const board = [];
 
 	function play(symbol, position) {
 		if (position < 0 || position > 8)
