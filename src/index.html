@@ -6,8 +6,17 @@
     <title>The Odin - Tic Tac Toe</title>
 </head>
 <body>
+	<header>
+		<div id="game-title">Tic Tac Toe - Naughts and Crosses</div>
+	</header>
 	<main>
-		<div id="gameboard">
+		<div id="info-board">
+			<div id="player-text">
+				<div id="player1-name">player 1</div> vs. <div id="player2-name">player 2</div>
+			</div>
+			<div id="winner-text"></div>
+		</div>
+		<div id="board">
 			<div id=0 class="square"></div>
 			<div id=1 class="square"></div>
 			<div id=2 class="square"></div>
@@ -18,8 +27,18 @@
 			<div id=7 class="square"></div>
 			<div id=8 class="square"></div>
 		</div>
+		<button id='reset-button'>Play again?</button>
 		<dialog>
+			<form method="dialog">
+				<p>Enter your names</p>
+				<input type="text" placeholder="Player 1" id="player1Input">
+				<input type="text" placeholder="Player 2" id="player2Input">	
+				<button id="play-game" type="submit">Play Game!</button>
+			</form>
 		</dialog>
 	</main>
+	<footer>
+		<div>Created by <a href="https://kenyachan.dev">Kenya Chan</a></div>
+	</footer>
 </body>
 </html>

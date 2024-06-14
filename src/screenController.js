@@ -1,47 +1,108 @@
-import { Gameboard } from './gameboard.js';
+class ScreenController {
+	game;
 
-const ScreenController = (() => {
-	const gameboardDOM = document.querySelector('#gameboard'); 
-	const squares = document.querySelectorAll('.square');
-	let players = [
-		{
-			player: "player1",
-			symbol: 'x',
-		},
-		{
-			player: "player2",
-			symbol: 'o',
-		}
-	];
+	constructor(game) {
+		this.game = game;
+		this.squares = document.querySelectorAll('.square');
 
-	let activePlayer = players[0];
+		this.setPlayerNames(this.game.player1, this.game.player2);
+		this.enableBoard();
 
-	//squares.forEach(square => square.addEventListener('click', () => console.log('hehehe... that tickles')));
+		const resetButton = document.querySelector('#reset-button');
+		resetButton.addEventListener('click', this.playAgain);
 
-	squares.forEach(square => {
-		//square.addEventListener('click', event => playRound(event.target));
-		square.addEventListener('click', playRound);
-	});
-	
-	function playRound(squareDOM) {
-		squareDOM.target.removeEventListener('click', playRound);
+		const newGameDialog = document.querySelector('dialog');
+
+		newGameDialog.showModal();
+		newGameDialog.addEventListener('submit', this.changePlayerNames);
+	}
+
+	changePlayerNames = () => {
+		const player1Input = document.querySelector('#player1Input');
+		const player2Input = document.querySelector('#player2Input');
+
+		if (player1Input.value)
+			this.game.player1.name = player1Input.value;
+
+		if (player2Input.value)
+			this.game.player2.name = player2Input.value;
+
+		this.setPlayerNames(this.game.player1, this.game.player2);
+	}
+
+	playRound = (squareDOM) => {
+		const activePlayer = this.game.activePlayer;
+		const position = Number(squareDOM.target.id);
+
+		this.disableSquare(squareDOM.target);
 		squareDOM.target.textContent = activePlayer.symbol;
 
-		Gameboard.play(activePlayer.symbol, squareDOM.target.id);
+		activePlayer.addMove(position);
+		this.game.board.play(activePlayer.symbol, position);
+	
+		const result = this.game.checkWin(this.game.board, activePlayer);
 
-		console.log(Gameboard.board);
-		nextPlayer();
+		if (result === 'win') {
+			this.disableBoard();
+			this.announceWinner(activePlayer);
+		}
+
+		if (result === 'tie')
+			this.announceWinner();
+
+		this.game.nextPlayer();
 	}
 
-	function nextPlayer() {
-		return activePlayer == players[0] ? 
-			activePlayer = players[1] :
-			activePlayer = players[0];
+	disableBoard() {
+		this.squares.forEach(square => this.disableSquare(square));
 	}
 
-	return {
-
+	enableBoard() {
+		this.squares.forEach(square => this.enableSquare(square));
 	}
-})();
 
-export { ScreenController };
+	enableSquare(square) {
+		square.addEventListener('click', this.playRound);
+		square.classList.add('active');
+	}
+
+	disableSquare(square) {
+		square.removeEventListener('click', this.playRound);
+		square.classList.remove('active');
+	}
+
+	announceWinner(player) {
+		const winnerText = document.querySelector('#winner-text');
+
+		if (player)
+			winnerText.innerText = `${player.name} wins!`;
+		else if (player === null)
+			winnerText.innerText = '';
+		else
+			winnerText.innerText = 'Game is a tie!';
+	}
+
+	clearBoard(squares) {
+		this.game.board.clear();
+		this.squares.forEach(square => square.innerText = '');
+	}
+
+	setPlayerNames(player1,  player2) {
+		const player1NamePlaceholder = document.querySelector('#player1-name');
+		const player2NamePlaceholder = document.querySelector('#player2-name');
+
+		player1NamePlaceholder.innerText = player1.name;
+		player2NamePlaceholder.innerText = player2.name;
+	}
+
+	playAgain = () => {
+		console.log('reset!');
+		this.announceWinner(null);
+		this.clearBoard();
+		this.enableBoard();
+		this.game.activePlayer = this.game.player1;
+	}
+}
+
+module.exports = ScreenController;
+
