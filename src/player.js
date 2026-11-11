@@ -1,6 +1,7 @@
 class Player {
 	#moves = [];
 	active = false;
+	isComputer = false;
 
 	constructor(name, symbol) {
 		this.name = name;
@@ -16,4 +17,4 @@ class Player {
 	}
 }
 
-module.exports = Player;
+export { Player as default };

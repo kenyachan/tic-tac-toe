@@ -1,3 +1,5 @@
+const COMPUTER_MOVE_DELAY_MS = 500;
+
 class ScreenController {
 	game;
 
@@ -15,6 +17,17 @@ class ScreenController {
 
 		newGameDialog.showModal();
 		newGameDialog.addEventListener('submit', this.changePlayerNames);
+
+		const opponentChoice = document.querySelector('#opponent-choice');
+		opponentChoice.addEventListener('change', this.togglePlayer2Input);
+	}
+
+	isPlayingComputer() {
+		return document.querySelector('input[name="opponent"]:checked').value === 'computer';
+	}
+
+	togglePlayer2Input = () => {
+		document.querySelector('#player2Input').hidden = this.isPlayingComputer();
 	}
 
 	changePlayerNames = () => {
@@ -24,18 +37,40 @@ class ScreenController {
 		if (player1Input.value)
 			this.game.player1.name = player1Input.value;
 
-		if (player2Input.value)
+		if (this.isPlayingComputer()) {
+			this.game.player2.name = 'Computer';
+			this.game.player2.isComputer = true;
+		} else if (player2Input.value) {
 			this.game.player2.name = player2Input.value;
+		}
 
 		this.setPlayerNames(this.game.player1, this.game.player2);
 	}
 
 	playRound = (squareDOM) => {
-		const activePlayer = this.game.activePlayer;
-		const position = Number(squareDOM.target.id);
+		const result = this.playMove(Number(squareDOM.target.id));
 
-		this.disableSquare(squareDOM.target);
-		squareDOM.target.textContent = activePlayer.symbol;
+		if (result === 'continue' && this.game.activePlayer.isComputer)
+			this.playComputerTurn();
+	}
+
+	playComputerTurn() {
+		this.disableBoard();
+
+		this.computerTimeout = setTimeout(() => {
+			const result = this.playMove(this.game.chooseComputerMove());
+
+			if (result === 'continue')
+				this.enableBoard();
+		}, COMPUTER_MOVE_DELAY_MS);
+	}
+
+	playMove(position) {
+		const activePlayer = this.game.activePlayer;
+		const square = this.squares[position];
+
+		this.disableSquare(square);
+		square.textContent = activePlayer.symbol;
 
 		activePlayer.addMove(position);
 		this.game.board.play(activePlayer.symbol, position);
@@ -51,6 +86,8 @@ class ScreenController {
 			this.announceWinner();
 
 		this.game.nextPlayer();
+
+		return result;
 	}
 
 	disableBoard() {
@@ -58,7 +95,10 @@ class ScreenController {
 	}
 
 	enableBoard() {
-		this.squares.forEach(square => this.enableSquare(square));
+		this.squares.forEach(square => {
+			if (this.game.board.getPosition(Number(square.id)) === undefined)
+				this.enableSquare(square);
+		});
 	}
 
 	enableSquare(square) {
@@ -97,6 +137,7 @@ class ScreenController {
 
 	playAgain = () => {
 		console.log('reset!');
+		clearTimeout(this.computerTimeout);
 		this.announceWinner(null);
 		this.clearBoard();
 		this.enableBoard();

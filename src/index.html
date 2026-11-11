@@ -30,6 +30,11 @@
 		<button id='reset-button'>Play again?</button>
 		<dialog>
 			<form method="dialog">
+				<fieldset id="opponent-choice">
+					<legend>Play against</legend>
+					<label><input type="radio" name="opponent" value="human" checked> Another player</label>
+					<label><input type="radio" name="opponent" value="computer"> Computer</label>
+				</fieldset>
 				<p>Enter your names</p>
 				<input type="text" placeholder="Player 1" id="player1Input">
 				<input type="text" placeholder="Player 2" id="player2Input">	

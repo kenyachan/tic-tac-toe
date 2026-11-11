@@ -1,6 +1,15 @@
+/*
+import { Game } from './game';
+
+jest.enableAutomock();
+
+import { Board } from './board';
+import { Player } from './player';
+*/
+
 const Game = require('./game');
 
-const Board = jest.createMockFromModule('./board');
+const { Board } = jest.createMockFromModule('./board');
 const Player = jest.mock('./player');
 jest.mock('./player');
 

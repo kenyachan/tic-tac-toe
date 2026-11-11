@@ -2,7 +2,7 @@ import './style.css';
 import './board.css';
 
 import ScreenController from './screenController.js';
-import Board from './board.js';
+import { Board } from './board.js';
 import Player from './player.js';
 import Game from './game.js';
 

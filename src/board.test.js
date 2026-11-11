@@ -1,4 +1,4 @@
-const Board = require('./board');
+import { Board } from './board';
 
 describe('Player should not be able to play an invalid position', () => {
 	let board;

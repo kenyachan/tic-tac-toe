@@ -1,4 +1,4 @@
-const Player = require('./player');
+import Player from './player';
 
 const name = 'player';
 const symbol = 'x';

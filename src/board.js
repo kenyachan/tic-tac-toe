@@ -1,4 +1,4 @@
-class Board {
+export class Board {
 	#squares;
 
 	constructor() {
@@ -27,6 +27,4 @@ class Board {
 		return this.#squares.clear();
 	}
 }
-
-module.exports = Board;
 
