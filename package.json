@@ -5,13 +5,16 @@
   "private": true,
   "scripts": {
     "test": "jest",
-	"build": "webpack",
-	"watch": "webpack --watch",
-	"start": "webpack serve --open"
+    "build": "webpack",
+    "watch": "webpack --watch",
+    "start": "webpack serve --open"
   },
   "author": "Kenya Chan",
   "license": "ISC",
   "devDependencies": {
+    "@babel/core": "^7.24.7",
+    "@babel/preset-env": "^7.24.7",
+    "babel-jest": "^29.7.0",
     "css-loader": "^7.1.1",
     "html-webpack-plugin": "^5.6.0",
     "style-loader": "^4.0.0",
